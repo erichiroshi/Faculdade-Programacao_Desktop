@@ -1,12 +1,12 @@
 package br.com.programacaodesktop.application;
 
-import br.com.programacaodesktop.telas.TelaCadastro;
+import br.com.programacaodesktop.telas.TelaListagem;
 
 public class Principal {
 
 	public static void main(String[] args) {
 
-		new TelaCadastro();
+		new TelaListagem();
 
 		/*
 		 * String nome; double preco;
