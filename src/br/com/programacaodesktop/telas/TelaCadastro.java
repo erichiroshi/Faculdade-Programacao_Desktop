@@ -2,12 +2,16 @@ package br.com.programacaodesktop.telas;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import br.com.programacaodesktop.ouvintes.ListenerSalvar;
 
 public class TelaCadastro extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -49,6 +53,17 @@ public class TelaCadastro extends JFrame {
 		
 		bt_ok = new JButton("CADASTRAR");
 		bt_cancela = new JButton("CANCELAR");
+		
+		bt_ok.addActionListener(new ListenerSalvar(text_nome, text_preco, text_categoria));
+		bt_cancela.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+				System.exit(0);
+			}
+		});
 		
 		panel.add(label_nome);
 		panel.add(text_nome);
