@@ -25,7 +25,9 @@ public class TelaListagem extends JFrame {
 
 	public TelaListagem() {
 		this.initialize();
-		this.setExtendedState(NORMAL);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+
 	}
 
 	public void initialize() {

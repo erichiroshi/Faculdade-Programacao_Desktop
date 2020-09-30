@@ -6,14 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.com.programacaodesktop.ouvintes.ListenerSalvar;
 
-public class TelaCadastro extends JFrame {
+public class TelaCadastro extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -31,9 +31,8 @@ public class TelaCadastro extends JFrame {
 
 	public TelaCadastro() {
 		this.initialize();
-
-		this.setExtendedState(NORMAL);
-		this.setAlwaysOnTop(true);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 
 	public void initialize() {
@@ -56,7 +55,7 @@ public class TelaCadastro extends JFrame {
 		bt_ok = new JButton("CADASTRAR");
 		bt_cancela = new JButton("CANCELAR");
 
-		bt_ok.addActionListener(new ListenerSalvar(text_nome, text_preco, text_categoria));
+		bt_ok.addActionListener(new ListenerSalvar(text_nome, text_preco, text_categoria, this));
 
 		bt_cancela.addActionListener(new ActionListener() {
 
@@ -80,8 +79,7 @@ public class TelaCadastro extends JFrame {
 		this.setPreferredSize(new Dimension(400, 200));
 		this.setTitle("Cadastro de Produto");
 		this.pack();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
 }
