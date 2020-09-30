@@ -7,31 +7,35 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import br.com.programacaodesktop.dao.DaoFactory;
+import br.com.programacaodesktop.dao.ProdutoDao;
+import br.com.programacaodesktop.entities.Produto;
+
 public class ListenerSalvar implements ActionListener {
 
 	private JTextField nome;
 	private JTextField preco;
-	private JTextField categoria;
 
 	private JDialog tela;
 
-	public ListenerSalvar(JTextField nome, JTextField preco, JTextField categoria) {
+	public ListenerSalvar(JTextField nome, JTextField preco) {
 		this.nome = nome;
 		this.preco = preco;
-		this.categoria = categoria;
 		this.tela = null;
 	}
 
-	public ListenerSalvar(JTextField nome, JTextField preco, JTextField categoria, JDialog tela) {
+	public ListenerSalvar(JTextField nome, JTextField preco, JDialog tela) {
 		this.nome = nome;
 		this.preco = preco;
-		this.categoria = categoria;
 		this.tela = tela;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String msg = "Nome: " + nome.getText() + "\nPreço: " + preco.getText() + "\nCategoria: " + categoria.getText();
+		String msg = "Nome: " + nome.getText() + "\nPreço: " + preco.getText();
+		Produto p = new Produto(nome.getText(), Double.parseDouble(preco.getText()));
+		ProdutoDao produtoDao = DaoFactory.createProdutoDao();
+		produtoDao.save(p);
 		JOptionPane.showMessageDialog(this.tela, msg);
 		this.tela.dispose();
 	}

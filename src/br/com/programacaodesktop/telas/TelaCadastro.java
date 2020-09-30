@@ -20,11 +20,9 @@ public class TelaCadastro extends JDialog {
 
 	private JLabel label_nome;
 	private JLabel label_preco;
-	private JLabel label_categoria;
 
 	private JTextField text_nome;
 	private JTextField text_preco;
-	private JTextField text_categoria;
 
 	private JButton bt_ok;
 	private JButton bt_cancela;
@@ -46,16 +44,14 @@ public class TelaCadastro extends JDialog {
 
 		label_nome = new JLabel("NOME: ");
 		label_preco = new JLabel("PRECO: ");
-		label_categoria = new JLabel("CATEGORIA: ");
 
 		text_nome = new JTextField();
 		text_preco = new JTextField();
-		text_categoria = new JTextField();
 
 		bt_ok = new JButton("CADASTRAR");
 		bt_cancela = new JButton("CANCELAR");
 
-		bt_ok.addActionListener(new ListenerSalvar(text_nome, text_preco, text_categoria, this));
+		bt_ok.addActionListener(new ListenerSalvar(text_nome, text_preco, this));
 
 		bt_cancela.addActionListener(new ActionListener() {
 
@@ -70,8 +66,6 @@ public class TelaCadastro extends JDialog {
 		panel.add(text_nome);
 		panel.add(label_preco);
 		panel.add(text_preco);
-		panel.add(label_categoria);
-		panel.add(text_categoria);
 		panel.add(bt_ok);
 		panel.add(bt_cancela);
 
