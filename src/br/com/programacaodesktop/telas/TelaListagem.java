@@ -9,7 +9,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
+import br.com.programacaodesktop.dao.DaoFactory;
+import br.com.programacaodesktop.dao.ProdutoDao;
+import br.com.programacaodesktop.db.DB;
+import br.com.programacaodesktop.entities.Produto;
 
 public class TelaListagem extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -23,20 +34,29 @@ public class TelaListagem extends JFrame {
 
 	private JLabel label_title;
 
+	private JList<Produto> lista;
+	private JScrollPane scroll_lista;
+	private ProdutoDao produtoDao;
+
 	public TelaListagem() {
+		this.produtoDao = DaoFactory.createProdutoDao();
 		this.initialize();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-
 	}
 
+	// inicialização
 	public void initialize() {
+
+		// botões
 		bt_novo = new JButton("Novo");
 		bt_deletar = new JButton("Apagar");
 		bt_sair = new JButton("Sair");
 
-		label_title = new JLabel("Listagem de Funcionários");
+		// título
+		label_title = new JLabel("Listagem de Produtos");
 
+		// painés
 		panel = new JPanel();
 		panel_botoes = new JPanel();
 
@@ -54,6 +74,7 @@ public class TelaListagem extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
+				DB.closeConnection();
 				System.exit(0);
 			}
 		});
@@ -66,6 +87,18 @@ public class TelaListagem extends JFrame {
 			}
 		});
 
+		// configuracao da listagem
+		// configura o painel
+		lista = new JList<>();
+		lista.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		lista.setLayoutOrientation(JList.VERTICAL);
+		lista.setModel(produtoDao.list());
+		lista.setVisibleRowCount(-1);
+		scroll_lista = new JScrollPane(lista);
+		panel.add(scroll_lista, BorderLayout.CENTER);
+		panel.add(label_title, BorderLayout.PAGE_START);
+		// adicao de elementos
+
 		panel_botoes.add(bt_novo);
 		panel_botoes.add(bt_deletar);
 		panel_botoes.add(bt_sair);
@@ -76,6 +109,6 @@ public class TelaListagem extends JFrame {
 
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 
+	}
 }
